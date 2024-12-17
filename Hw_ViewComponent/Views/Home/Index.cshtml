@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model IEnumerable<Book>
+
+@{
+    Random randon = new Random();
+}
+
+<div class="container px-4 py-5" id="featured-3">
+    <h2 class="pb-2 border-bottom">Books</h2>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+        @foreach(var book in Model)
+        {
+            <div class="feature col">
+                <h3 class="fs-2 mb-3">@book.Title</h3>
+               <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                   /**\
+               </div>
+               <p>
+                   <ul>
+                       <li>@book.Genre</li>
+                       <li>@book.Author</li>
+                       <li>@book.Price</li>
+                   </ul>
+               </p>
+               <a class="icon-link d-inline-flex align-items-center">
+                   <a asp-action="Details" asp-route-id=@book.Id>View Details</a>
+               </a>
+            </div>
+        }
+    </div>
+</div>

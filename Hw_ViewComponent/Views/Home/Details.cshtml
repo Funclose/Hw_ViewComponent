@@ -1,0 +1,42 @@
+﻿@using Hw_ViewComponent.ViewModel
+@model DetailsViewModel
+
+@if(Model.Book !=null)
+{
+	<h2>@Model.Book.Title</h2>
+
+	<p> 
+		<ul>
+			<li>@Model.Book.Genre</li>
+			<li>@Model.Book.Author</li>
+			<li>@Model.Book.Price</li>
+		</ul>
+	</p>
+}
+<form asp-action="AddComment" method="post" asp-route-BookId="@Model.Book.Id">
+	<div asp-validation-summary="ModelOnly"></div>
+	<div class="form-group">
+		<label asp-for="Comment" class="control-label"></label>
+		<textarea asp-for="Comment" class="from-control"></textarea>
+		<span asp-validation-for="Comment" class="text-danger"></span>
+	</div>
+	<div class="form-group mt-2">
+		<button type="submit" class="btn btn-primary">Add Comment</button>
+	</div>
+</form>
+
+<div class="my-3 p-3 rounded shadow-sm">
+	<h6 class="border-bottom pb-2 mb-0">Comment</h6>
+	@foreach(var comment in Model.Comments)
+	{
+		<div class="d-flex text-muted pt-3">
+			<div class="d-flex justify-content-between">
+				<strong class="text-gray-dark">@comment.Content</strong>
+			</div>
+			<span class="d-block">@comment.PostedTime.ToShortDateString()</span>
+		</div>
+	}
+	<small class="d-block text-end mt-3">
+		<a href="#">All Comments</a>
+	</small>
+</div>
